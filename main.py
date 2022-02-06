@@ -4,10 +4,9 @@ import time
 import pygame, sys
 
 pygame.init()
-size = width, height = 1000, 800
 black = 0, 0, 0
+size = width, height = 1000, 800
 screen = pygame.display.set_mode(size)
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
 class Ball:
@@ -26,7 +25,7 @@ class Ball:
         self.rect = self.rect.move(self.speed)
         self.change_direction() # if needed
         screen.blit(self.ball_img, self.rect)
-        pygame.display.flip()
+
 
     def change_direction(self):
         if self.rect.left < 0 or self.rect.right > width:
@@ -52,6 +51,7 @@ if __name__ == '__main__':
         for ball in balls:
             ball.show()
 
+        pygame.display.flip()
         screen.fill(black)
         time.sleep(20/1000)
 
