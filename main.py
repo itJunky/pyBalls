@@ -5,20 +5,21 @@ import sys
 import pygame
 
 balls_count = 100
-ball_size = 15
+ball_size = 20
 pygame.init()
 balls = []
 black = 0, 0, 0
 size = scr_width, scr_height = 1200, 800
 screen = pygame.display.set_mode(size)
 # "intro_ball.gif"
-ball_image_file = "bzz_ball.gif"
+ball_image_file = "bzz_green_ball.gif"
 
 class Ball:
     def __init__(self, first_x, first_y, speed=5, bsz=25):
         ball_img = pygame.image.load(ball_image_file).convert_alpha()
         bl_size = (bsz, bsz)
         self.TARGET = [400, 200]
+        self.CONTACTED = 0
         self.ball_img = pygame.transform.scale(ball_img, bl_size)
         self.speed = [speed, speed]
         if first_x or first_y:
@@ -30,6 +31,8 @@ class Ball:
         self.get_new_coordinates()
         self.check_target()
         self.change_direction()
+        self.check_contact()
+        self.set_img()
         screen.blit(self.ball_img, self.rect)
 
     def change_direction(self):
@@ -72,6 +75,25 @@ class Ball:
         distance = math.sqrt((self.TARGET[0] - self.rect.x) ** 2 + (self.TARGET[1] - self.rect.y) ** 2)
         if distance <= ball_size:  # Если текущая еда ближе чем предыдущая ближайшая
             self.set_target()
+
+    def check_contact(self):
+        for ball in balls:
+            if self == ball: continue
+            distance = math.sqrt((self.rect.x - ball.rect.x) ** 2 + (self.rect.y - ball.rect.y) ** 2)
+            if distance < 1.5 * ball_size:
+                self.CONTACTED = 10
+
+        if self.CONTACTED > 0:
+            self.CONTACTED -= 1
+
+
+    def set_img(self):
+        if self.CONTACTED:
+            ball_img = pygame.image.load("bzz_blue_ball.gif").convert_alpha()
+        else:
+            ball_img = pygame.image.load("bzz_green_ball.gif").convert_alpha()
+
+        self.ball_img = pygame.transform.scale(ball_img, (ball_size, ball_size))
 
 
 # Start main circle of program
