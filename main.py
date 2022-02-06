@@ -39,7 +39,7 @@ class Ball:
 # Start main circle of program
 if __name__ == '__main__':
     name = 'Baller'
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'Hi, {name}')
 
     for i in range(balls_count):
         balls.append(Ball(
