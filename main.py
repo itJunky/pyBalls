@@ -12,7 +12,7 @@ black = 0, 0, 0
 size = scr_width, scr_height = 1200, 800
 screen = pygame.display.set_mode(size)
 # "intro_ball.gif"
-ball_image_file = "bzz_green_ball.gif"
+ball_image_file = "img/bzz_green_ball.gif"
 
 
 class Ball:
@@ -108,12 +108,12 @@ class Ball:
 
     def set_img(self):
         if self.FLASHING:
-            ball_img = pygame.image.load("bzz_blue_ball.gif").convert_alpha()
+            ball_img = pygame.image.load("img/bzz_blue_ball.gif").convert_alpha()
         elif self.INTARGET:
-            ball_img = pygame.image.load("bzz_red_ball.gif").convert_alpha()
+            ball_img = pygame.image.load("img/bzz_red_ball.gif").convert_alpha()
             self.INTARGET = False
         else:
-            ball_img = pygame.image.load("bzz_green_ball.gif").convert_alpha()
+            ball_img = pygame.image.load("img/bzz_green_ball.gif").convert_alpha()
 
         self.ball_img = pygame.transform.scale(ball_img, (ball_size, ball_size))
 
